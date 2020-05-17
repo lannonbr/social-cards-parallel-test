@@ -21,7 +21,7 @@ const LannonbrPage = (props) => {
           },
           {
             name: `twitter:card`,
-            content: props.ogImage ? `summary_large_image` : `summary`,
+            content: `summary_large_image`,
           },
           {
             name: `twitter:image`,
