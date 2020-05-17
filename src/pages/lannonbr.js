@@ -9,7 +9,7 @@ const LannonbrPage = (props) => {
         meta={[
           {
             name: `og:title`,
-            content: props.title,
+            content: "Lannonbr",
           },
           {
             name: `og:type`,
@@ -17,7 +17,7 @@ const LannonbrPage = (props) => {
           },
           {
             name: `twitter:title`,
-            content: props.title,
+            content: "Lannonbr",
           },
           {
             name: `twitter:card`,
