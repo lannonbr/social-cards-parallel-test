@@ -1,0 +1,47 @@
+name: Build
+on:
+  push:
+    branches: [master]
+jobs:
+  gatsby-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: public-dir
+          path: public
+  gen-og-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          cd scripts/genOGImages
+          npm install
+          npm run build
+          node gen-og-images.js
+      - uses: actions/upload-artifact@v2
+        with:
+          name: og-images
+          path: scripts/genOGImages/dist/members/
+  deploy-build:
+    needs: [gatsby-build, gen-og-images]
+    runs-on: ubuntu-latest
+    steps:
+      - name: get public dir
+        uses: actions/download-artifact@v2
+        with:
+          name: public-dir
+          path: public
+      - name: get og-images dir
+        uses: actions/download-artifact@v2
+        with:
+          name: og-images
+          path: public/og/members/
+      - name: Deploy site
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=public --prod
