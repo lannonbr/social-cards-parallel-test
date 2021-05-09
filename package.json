@@ -7,10 +7,10 @@
     "build": "gatsby build"
   },
   "dependencies": {
-    "gatsby": "^2.21.33",
-    "gatsby-plugin-react-helmet": "^3.3.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^6.0.0"
+    "gatsby": "^2.32.12",
+    "gatsby-plugin-react-helmet": "^3.10.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-helmet": "^6.1.0"
   }
 }

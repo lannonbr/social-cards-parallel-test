@@ -4,8 +4,6 @@ import commonjs from "@rollup/plugin-commonjs"
 import builtins from "rollup-plugin-node-builtins"
 import globals from "rollup-plugin-node-globals"
 import replace from "@rollup/plugin-replace"
-import React from "react"
-import ReactDOM from "react-dom"
 
 const config = {
   input: "src/image.js",
@@ -22,13 +20,9 @@ const config = {
     babel({
       exclude: "node_modules/**",
     }),
-    commonjs({
-      namedExports: {
-        "react-dom": Object.keys(ReactDOM),
-        react: Object.keys(React),
-      },
-    }),
+    commonjs(),
     replace({
+      preventAssignment: true,
       "process.env.NODE_ENV": JSON.stringify("production"),
     }),
     globals(),
